@@ -1,6 +1,17 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Question from "./pages/Question";
+import Preview from "./pages/Preview";
+
 const App = () => {
   return (
-    <h1 className="text-3xl font-bold underline text-red-500">Hello world!</h1>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="question/:questionId" element={<Question />} />
+        <Route path="preview/:questionId" element={<Preview />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
