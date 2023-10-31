@@ -1,5 +1,7 @@
+import QuestionBox from "../features/questioin/QuestionBox";
+
 const Question = () => {
-  return <div>Question</div>;
+  return <QuestionBox />;
 };
 
 export default Question;
