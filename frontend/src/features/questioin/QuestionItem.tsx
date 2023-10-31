@@ -3,8 +3,12 @@ import TextArea from "../../ui/TextArea";
 import QuestionItemHeader from "./QuestionItemHeader";
 import Draggable from "../../ui/Draggable";
 import BoxHeader from "../../ui/BoxHeader";
+import Button from "../../ui/Button";
 
-const QuestionItem = () => {
+type Props = {
+  addQuestion: () => void;
+};
+const QuestionItem = ({ addQuestion }: Props) => {
   const [questionText, setQuestionText] = useState("");
   const [categoriesList, setCategoriesList] = useState<ListI[]>([
     { value: "", id: Date.now() },
@@ -38,6 +42,11 @@ const QuestionItem = () => {
         setList={setItemList}
         belongList={categoriesList}
       />
+      <div className="flex gap-x-4 mt-6">
+        <Button onClick={addQuestion}>Add Question</Button>
+        <Button>Delete Question</Button>
+        <Button>Save</Button>
+      </div>
     </div>
   );
 };
