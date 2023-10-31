@@ -2,8 +2,8 @@ type Props = {
   rows?: number;
   placeholder?: string;
   required?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  value: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  value?: string;
 };
 
 const TextArea = ({

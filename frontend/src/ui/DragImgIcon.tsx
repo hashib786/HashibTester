@@ -1,9 +1,16 @@
-const DragImgIcon = () => {
+const DragImgIcon = ({
+  src,
+  onClick = () => {},
+}: {
+  src: string;
+  onClick?: () => void;
+}) => {
   return (
     <img
       draggable="false"
       className="w-7 cursor-pointer"
-      src="https://cdn-icons-png.flaticon.com/512/3793/3793594.png"
+      src={src}
+      onClick={onClick}
       alt="Dragging Image"
     />
   );

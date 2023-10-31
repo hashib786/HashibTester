@@ -8,7 +8,9 @@ const QuestionItem = () => {
   const [dragStartElement, setDragStartElement] = useState<null | HTMLElement>(
     null
   );
-  const [categoriesList, setCategoriesList] = useState([{ value: "" }]);
+  const [categoriesList, setCategoriesList] = useState([
+    { value: "", id: Date.now() },
+  ]);
   const [questionText, setQuestionText] = useState("");
 
   function handleStartDrag(e: React.DragEvent<HTMLDivElement>) {
@@ -33,6 +35,10 @@ const QuestionItem = () => {
 
   const handleChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setQuestionText(e.target.value);
+  const handleDelete = (id: number) => {
+    if (categoriesList.length > 1)
+      setCategoriesList((prev) => prev.filter((item) => item.id !== id));
+  };
 
   const handleCategoriesChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -43,7 +49,7 @@ const QuestionItem = () => {
         i === index ? { ...ele, value: e.target.value } : ele
       );
       if (updateList.length !== 0 && updateList[updateList.length - 1].value)
-        updateList.push({ value: "" });
+        updateList.push({ value: "", id: Date.now() });
       return updateList;
     });
   };
@@ -67,15 +73,19 @@ const QuestionItem = () => {
               draggable="true"
               className="dragged duration-200 transition-all flex items-center gap-x-1 cursor-pointer"
             >
-              <DragImgIcon />
+              <DragImgIcon src="https://cdn-icons-png.flaticon.com/512/3793/3793594.png" />
               <TextArea
                 value={list.value}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                   handleCategoriesChange(e, i)
                 }
-                required={true}
+                required={i + 1 !== categoriesList.length}
                 rows={1}
                 placeholder={`Categories (Optional ${i + 1})`}
+              />
+              <DragImgIcon
+                onClick={() => handleDelete(list.id)}
+                src="https://cdn-icons-png.flaticon.com/512/3756/3756676.png"
               />
             </div>
           ))}
