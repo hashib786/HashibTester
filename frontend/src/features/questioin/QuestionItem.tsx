@@ -7,8 +7,16 @@ import Button from "../../ui/Button";
 
 type Props = {
   addQuestion: () => void;
+  deleteQuestion: (id: number) => void;
+  index: number;
+  question: ListI;
 };
-const QuestionItem = ({ addQuestion }: Props) => {
+const QuestionItem = ({
+  addQuestion,
+  index,
+  deleteQuestion,
+  question: { id: questionId },
+}: Props) => {
   const [questionText, setQuestionText] = useState("");
   const [categoriesList, setCategoriesList] = useState<ListI[]>([
     { value: "", id: Date.now() },
@@ -22,7 +30,7 @@ const QuestionItem = ({ addQuestion }: Props) => {
 
   return (
     <div className="border flex flex-col gap-y-4 border-gray-300 rounded-md p-4">
-      <QuestionItemHeader />
+      <QuestionItemHeader index={index} />
       <TextArea
         required={true}
         value={questionText}
@@ -44,7 +52,9 @@ const QuestionItem = ({ addQuestion }: Props) => {
       />
       <div className="flex gap-x-4 mt-6">
         <Button onClick={addQuestion}>Add Question</Button>
-        <Button>Delete Question</Button>
+        <Button onClick={() => deleteQuestion(questionId)}>
+          Delete Question
+        </Button>
         <Button>Save</Button>
       </div>
     </div>
