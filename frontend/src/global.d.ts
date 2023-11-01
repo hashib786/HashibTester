@@ -3,6 +3,8 @@ declare global {
     value: string;
     id: number;
   }
+
+  type QuestionType = "Categorize" | "Cloze" | "MCQ";
 }
 
 const hello = "Hashib";
